@@ -1,4 +1,4 @@
-name: Check Connectivity
+name: Check Website Element
 
 on:
   schedule:
@@ -6,8 +6,9 @@ on:
   push:
 
 jobs:
-  check:
+  check-website:
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -17,10 +18,9 @@ jobs:
         with:
           python-version: '3.x'
       
-      - name: Install Ansible
+      - name: Install Selenium and WebDriver Manager
         run: |
-          python -m pip install --upgrade pip
-          pip install ansible
+          pip install selenium webdriver-manager
       
-      - name: Run Ansible Playbook
-        run: ansible-playbook check_status.yml
+      - name: Check Element on Website
+        run: python check_element.py
