@@ -1,0 +1,12 @@
+- hosts: localhost
+  tasks:
+    - name: Check connectivity to Google
+      uri:
+        url: https://www.google.com
+        method: GET
+        return_content: yes
+      register: web_response
+
+    - name: Print web page content
+      debug:
+        var: web_response.content
